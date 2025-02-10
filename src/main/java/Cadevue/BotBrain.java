@@ -7,16 +7,31 @@ import Models.PlayerAction;
 /* Class that decide which action should be done based on the state scores */
 public class BotBrain {
     // Initialization of States
-    private final BotState[] BOT_STATES = {};
+    private final IBotState[] BOT_STATES = {};
 
-    public PlayerAction GetBotAction(GameState gameState, GameObject player) {
-        BotState bestState = GetBestAction(gameState, player);
+    // Return what acttion should the bot do
+    public PlayerAction getBotAction(GameState gameState, GameObject player) {
+        GameContext.setContext(gameState, player);
+
+        IBotState bestState = calculateBestState();
         PlayerAction action = bestState.GetAction();
 
         return action;
     }
 
-    private BotState GetBestAction(GameState gameState, GameObject player) {
-        return null;
+    // Calculate the best state based on each state scores
+    private IBotState calculateBestState() {
+        float bestScore = Integer.MIN_VALUE;
+        IBotState bestState = null;
+
+        for (IBotState botState : BOT_STATES) {
+            int score = botState.GetStateScore();
+            if (score > bestScore) {
+                bestScore = score;
+                bestState = botState;
+            }
+        }
+
+        return bestState;
     }
 }
