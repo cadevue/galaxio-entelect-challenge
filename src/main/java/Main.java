@@ -26,12 +26,14 @@ public class Main {
                 .build();
 
         hubConnection.on("Disconnect", (id) -> {
+            // On disconnect with the runner
             System.out.println("Disconnected:");
 
             hubConnection.stop();
         }, UUID.class);
 
         hubConnection.on("Registered", (id) -> {
+            // On registered with the runner
             System.out.println("Registered with the runner " + id);
 
             Position position = new Position();
@@ -40,6 +42,7 @@ public class Main {
         }, UUID.class);
 
         hubConnection.on("ReceiveGameState", (gameStateDto) -> {
+            // Receive game state from the runner
             GameState gameState = new GameState();
             gameState.world = gameStateDto.getWorld();
 
@@ -58,7 +61,7 @@ public class Main {
 
         Thread.sleep(1000);
         System.out.println("Registering with the runner...");
-        hubConnection.send("Register", token, "Coffee Bot");
+        hubConnection.send("Register", token, "The Cadevue");
 
         //This is a blocking call
         hubConnection.start().subscribe(() -> {

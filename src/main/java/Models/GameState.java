@@ -4,9 +4,9 @@ import java.util.*;
 
 public class GameState {
 
-    public World world;
-    public List<GameObject> gameObjects;
-    public List<GameObject> playerGameObjects;
+    private World world;
+    private List<GameObject> gameObjects;
+    private List<GameObject> playerGameObjects;
 
     public GameState() {
         world = new World();
