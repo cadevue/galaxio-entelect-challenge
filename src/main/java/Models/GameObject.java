@@ -5,27 +5,27 @@ import java.util.*;
 
 public class GameObject {
 
-	private UUID id;
-	private Integer size;
-	private Integer speed;
-	private Integer currentHeading;
-	private Position position;
-	private ObjectTypes gameObjectType;
-	private Integer effect;
-	private Integer torpedoSalvoCount;
-	private Integer supernovaAvailable;
-	private Integer teleporterCount;
-	private Integer shieldCount;
+	public UUID id;
+
+	public int size;
+	public int speed;
+	public int currentHeading;
+	public Position position;
+
+	public ObjectTypes gameObjectType;
+
+	public int effect;
+	public int torpedoSalvoCount;
+	public int supernovaAvailable;
+	public int teleporterCount;
+	public int shieldCount;
 
 	public GameObject(
-		UUID id, Integer size, Integer speed, Integer currentHeading, 
-		Position position, ObjectTypes gameObjectType,
-		Integer effect = 0, Integer torpedoSalvoCount = 0, 
-		Integer supernovaAvailable = 0, Integer teleporterCount = 0, 
-		Integer shieldCount = 0
-	) 
-
-	{
+		UUID id, int size, int speed, int currentHeading, 
+		Position position, ObjectTypes gameObjectType, int effect, 
+		int torpedoSalvoCount, int supernovaAvailable, int teleporterCount, 
+		int shieldCount
+	) {
 		this.id = id;
 		this.size = size;
 		this.speed = speed;
@@ -71,7 +71,7 @@ public class GameObject {
 		this.position = position;
 	}
 
-	public Integer getEffect(){
+	public int getEffect(){
 		return effect;
 	}
 
@@ -83,31 +83,39 @@ public class GameObject {
 		this.gameObjectType = gameObjectType;
 	}
 
-	public Integer getTorpedoSalvoCount(){
+	public int getTorpedoSalvoCount(){
 		return this.torpedoSalvoCount;
 	}
 
-	public Integer getSupernovaCount(){
+	public int getSupernovaCount(){
 		return this.supernovaAvailable;
 	}
 
-	public Integer getTeleporterCount(){
+	public int getTeleporterCount(){
 		return this.teleporterCount;
 	}
 
-	public Integer getCurrHeading(){
+	public int getCurrHeading(){
 		return this.currentHeading;
 	}
 
 	public static GameObject FromStateList(UUID id, List<Integer> stateList)
 	{
 		Position position = new Position(stateList.get(4), stateList.get(5));
+		if (ObjectTypes.valueOf(stateList.get(3)) == ObjectTypes.Player) {
+			return new GameObject(
+				id, stateList.get(0), stateList.get(1), 
+				stateList.get(2), position, ObjectTypes.valueOf(stateList.get(3)), 
+				stateList.get(6), stateList.get(7), stateList.get(8), 
+				stateList.get(9), stateList.get(10)
+			);
+		}
+
+		// Else, not player
 		return new GameObject(
-			id, stateList.get(0), stateList.get(1), stateList.get(2), 
-			position, ObjectTypes.valueOf(stateList.get(3)), 
-			stateList.get(6), stateList.get(7), 
-			stateList.get(8), stateList.get(9), 
-			stateList.get(10)
+			id, stateList.get(0), stateList.get(1), 
+			stateList.get(2), position, ObjectTypes.valueOf(stateList.get(3)), 
+			0, 0, 0, 0, 0
 		);
-	}
+  }
 }

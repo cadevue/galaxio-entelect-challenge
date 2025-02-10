@@ -1,20 +1,20 @@
 package Enums;
 
 public enum PlayerActions {
-  FORWARD(1),
-  STOP(2),
-  STARTAFTERBURNER(3),
-  STOPAFTERBURNER(4),
-  FIRETORPEDOES(5),
-  FIRESUPERNOVA(6),
-  DETONATESUPERNOVA(7),
-  FIRETELEPORT(8),
-  TELEPORT(9),
-  ACTIVATESHIELD(10);
+    Forward(1),
+    Stop(2),
+    StartAfterburner(3),
+    StopAfterburner(4),
+    FireTorpedoes(5),
+    FireSupernova(6),
+    DetonateSupernova(7),
+    FireTeleport(8),
+    Teleport(9),
+    ActivateShield(10);
 
-  public final Integer value;
+    public final Integer value;
 
-  private PlayerActions(Integer value) {
-    this.value = value;
-  }
+    private PlayerActions(Integer value) {
+        this.value = value;
+    }
 }

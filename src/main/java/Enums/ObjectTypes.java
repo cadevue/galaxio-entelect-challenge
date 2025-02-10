@@ -1,29 +1,29 @@
 package Enums;
 
 public enum ObjectTypes {
-  PLAYER(1),
-  FOOD(2),
-  WORMHOLE(3),
-  GASCLOUD(4),
-  ASTEROIDFIELD(5),
-  TORPEDOSALVO(6),
-  SUPERFOOD(7),
-  SUPERNOVAPICKUP(8),
-  SUPERNOVABOMB(9),
-  TELEPORTER(10),
-  SHIELD(11);
+    Player(1),
+    Food(2),
+    Wormhole(3),
+    GasCloud(4),
+    AsteroidField(5),
+    TorpedoSalvo(6),
+    SuperFood(7),
+    SupernovaPickup(8),
+    SupernovaBomb(9),
+    Teleporter(10),
+    Shield(11);
 
-  public final Integer value;
+    public final Integer value;
 
-  ObjectTypes(Integer value) {
-    this.value = value;
-  }
-
-  public static ObjectTypes valueOf(Integer value) {
-    for (ObjectTypes objectType : ObjectTypes.values()) {
-      if (objectType.value == value) return objectType;
+    ObjectTypes(Integer value) {
+        this.value = value;
     }
 
-    throw new IllegalArgumentException("Value not found");
-  }
+    public static ObjectTypes valueOf(Integer value) {
+        for (ObjectTypes objectType : ObjectTypes.values()) {
+        if (objectType.value == value) return objectType;
+        }
+
+        throw new IllegalArgumentException("Value not found");
+    }
 }

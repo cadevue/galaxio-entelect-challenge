@@ -4,9 +4,9 @@ import java.util.*;
 
 public class GameStateDto {
 
-    public World world;
-    public Map<String, List<Integer>> gameObjects;
-    public Map<String, List<Integer>> playerObjects;
+    private World world;
+    private Map<String, List<Integer>> gameObjects;
+    private Map<String, List<Integer>> playerObjects;
 
     public Models.World getWorld() {
         return world;
@@ -29,6 +29,6 @@ public class GameStateDto {
     }
 
     public void setPlayerObjects(Map<String, List<Integer>> playerObjects) {
-        playerObjects = playerObjects;
+        this.playerObjects = playerObjects;
     }
 }

@@ -4,9 +4,9 @@ import java.util.*;
 
 public class GameState {
 
-    private World world;
-    private List<GameObject> gameObjects;
-    private List<GameObject> playerGameObjects;
+    public World world;
+    public List<GameObject> gameObjects;
+    public List<GameObject> playerGameObjects;
 
     public GameState() {
         world = new World();
@@ -37,7 +37,7 @@ public class GameState {
     }
 
     public List<GameObject> getPlayerGameObjects() {
-        return playerGameObjects;
+        return this.playerGameObjects;
     }
 
     public void setPlayerGameObjects(List<GameObject> playerGameObjects) {
