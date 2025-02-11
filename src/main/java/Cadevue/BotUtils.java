@@ -58,7 +58,7 @@ public class BotUtils {
         return closest;
     }
 
-    public static GameObject getClosesGameObject(GameObject gameObject, List<GameObject> gameObjects) {
+    public static GameObject getClosestGameObject(GameObject gameObject, List<GameObject> gameObjects) {
         return getClosesGameObject(gameObject.getPosition(), gameObjects);
     }
 }

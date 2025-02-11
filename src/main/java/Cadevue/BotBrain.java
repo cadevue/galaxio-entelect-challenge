@@ -1,6 +1,7 @@
 package Cadevue;
 
-import Cadevue.States.GatherFood;
+import Cadevue.States.*;
+
 import Models.GameObject;
 import Models.GameState;
 import Models.PlayerAction;
@@ -9,9 +10,11 @@ import Models.PlayerAction;
 public class BotBrain {
     // Initialization of States
     private final IBotState STATE_GATHERFOOD = new GatherFood();
+    private final IBotState STATE_GETSUPERFOOD = new GetSuperFood();
 
     private final IBotState[] BOT_STATES = { 
-        STATE_GATHERFOOD 
+        STATE_GATHERFOOD,
+        STATE_GETSUPERFOOD
     };
 
     // Return what acttion should the bot do

@@ -31,8 +31,8 @@ public class GatherFood implements IBotState {
     }
 
     private void goToClosestFood() {
-        List<GameObject> food = GameContext.getGameObjectsOfType(ObjectTypes.Food);
-        if (food == null || food.isEmpty()) {
+        List<GameObject> foods = GameContext.getGameObjectsOfType(ObjectTypes.Food);
+        if (foods == null || foods.isEmpty()) {
             action.setAction(PlayerActions.Forward);
 
             int heading = BotUtils.getHeading(
@@ -44,7 +44,7 @@ public class GatherFood implements IBotState {
         } else {
             action.setAction(PlayerActions.Forward);
 
-            GameObject closestFood = BotUtils.getClosesGameObject( GameContext.getPlayer(), food );
+            GameObject closestFood = BotUtils.getClosestGameObject( GameContext.getPlayer(), foods );
             int heading = BotUtils.getHeading(GameContext.getPlayer(), closestFood);
 
             action.setHeading(heading);
