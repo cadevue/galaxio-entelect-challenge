@@ -4,8 +4,8 @@ import Models.PlayerAction;
 
 public interface IBotState {
     /* Will be used to rank the state among others */
-    int GetStateScore();
+    float getStateScore();
 
     /* If selected, the bot will perform the action */
-    PlayerAction GetAction();
+    PlayerAction getAction();
 }
