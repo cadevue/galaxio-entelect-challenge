@@ -42,4 +42,23 @@ public class BotUtils {
     public static List<GameObject> getGameObjectsOfType(ObjectTypes type) {
         return GameContext.getGameObjectsOfType(type);
     }
+
+    public static GameObject getClosesGameObject(Position position, List<GameObject> gameObjects) {
+        GameObject closest = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (GameObject gameObject : gameObjects) {
+            double distance = getDistance(position, gameObject.getPosition());
+            if (distance < minDistance) {
+                minDistance = distance;
+                closest = gameObject;
+            }
+        }
+
+        return closest;
+    }
+
+    public static GameObject getClosesGameObject(GameObject gameObject, List<GameObject> gameObjects) {
+        return getClosesGameObject(gameObject.getPosition(), gameObjects);
+    }
 }

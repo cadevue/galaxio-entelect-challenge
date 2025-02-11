@@ -1,5 +1,6 @@
 package Cadevue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,8 @@ public class GameContext {
     private static void calculateGameObjects() {
         for (GameObject gameObject : gameState.getGameObjects()) {
             if (!gameObjects.containsKey(gameObject.getGameObjectType())) {
-                gameObjects.put(gameObject.getGameObjectType(), List.of(gameObject));
+                gameObjects.put(gameObject.getGameObjectType(), new ArrayList<>());
+                gameObjects.get(gameObject.getGameObjectType()).add(gameObject);
             } else {
                 gameObjects.get(gameObject.getGameObjectType()).add(gameObject);
             }
@@ -41,10 +43,10 @@ public class GameContext {
     }
 
     public static List<GameObject> getGameObjectsOfType(ObjectTypes type) {
-        if (gameObjects.isEmpty()) {
+        if (GameContext.gameObjects.isEmpty()) {
             calculateGameObjects();
         }
 
-        return gameObjects.get(type);
+        return GameContext.gameObjects.get(type);
     }
 }

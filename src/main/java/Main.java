@@ -54,6 +54,11 @@ public class Main {
             botService.setGameState(gameState);
         }, GameStateDto.class);
 
+        hubConnection.on("ReceivePlayerConsumed", () -> {
+            System.out.println("Player consumed");
+            hubConnection.stop();
+        });
+
         hubConnection.start().blockingAwait();
 
         Thread.sleep(1000);

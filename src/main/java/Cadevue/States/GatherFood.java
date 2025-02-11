@@ -32,13 +32,20 @@ public class GatherFood implements IBotState {
 
     private void goToClosestFood() {
         List<GameObject> food = GameContext.getGameObjectsOfType(ObjectTypes.Food);
-        if (food.isEmpty()) {
+        if (food == null || food.isEmpty()) {
             action.setAction(PlayerActions.Forward);
 
             int heading = BotUtils.getHeading(
                 GameContext.getPlayer().getPosition(), 
                 GameContext.getGameState().getWorld().getCenterPoint()
             );
+
+            action.setHeading(heading);
+        } else {
+            action.setAction(PlayerActions.Forward);
+
+            GameObject closestFood = BotUtils.getClosesGameObject( GameContext.getPlayer(), food );
+            int heading = BotUtils.getHeading(GameContext.getPlayer(), closestFood);
 
             action.setHeading(heading);
         }
