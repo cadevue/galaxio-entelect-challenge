@@ -1,7 +1,6 @@
 package Cadevue;
 
 import Cadevue.States.*;
-
 import Models.GameObject;
 import Models.GameState;
 import Models.PlayerAction;
@@ -9,12 +8,15 @@ import Models.PlayerAction;
 /* Class that decide which action should be done based on the state scores */
 public class BotBrain {
     // Initialization of States
-    private final IBotState[] BOT_STATES = { 
+    private final IBotState[] BOT_STATES = {
         new GatherFood(),
         new GetSuperFood(),
         new TorpedoAttack(),
         new UseShield(),
-        new StaySafe()
+        new StaySafe(),
+        new PickUpSupernova(),
+        new FireSupernova(),
+        new DetonateSupernova()
     };
 
     // Return what action should the bot do

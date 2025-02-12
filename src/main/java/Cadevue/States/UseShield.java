@@ -34,7 +34,7 @@ public class UseShield implements IBotState {
 
         List<GameObject> dangerousTorpedoes = torpedoes.stream()
             .filter(torpedo -> BotUtils.getDistanceTo(torpedo) < TORPEDO_DETECT_RADIUS + GameContext.getPlayer().getSize())
-            .filter(torpedo -> BotUtils.isObjectHeadingToPlayer(torpedo, (int) (GameContext.getPlayer().getSize() / 2.5f)))
+            .filter(torpedo -> BotUtils.isObjectHeadingToPlayer(torpedo, (int) (GameContext.getPlayer().getSize() / 4f)))
             .collect(Collectors.toList());
         
         return GameContext.getPlayer().getShieldCount() * dangerousTorpedoes.size() * 55;
