@@ -59,6 +59,11 @@ public class Main {
             hubConnection.stop();
         });
 
+        hubConnection.on("ReceiveGameComplete", (complete) -> {
+            System.out.println("Game complete");
+            hubConnection.stop();
+        }, GameCompleteDto.class);
+
         hubConnection.start().blockingAwait();
 
         Thread.sleep(1000);

@@ -95,6 +95,10 @@ public class GameObject {
 		return this.teleporterCount;
 	}
 
+	public int getShieldCount(){
+		return this.shieldCount;
+	}
+
 	public int getCurrHeading(){
 		return this.currentHeading;
 	}

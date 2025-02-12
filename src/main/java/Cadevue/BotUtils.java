@@ -120,6 +120,12 @@ public class BotUtils {
         return gameObjects;
     }
 
+    public static List<GameObject> getObjectsWithinRadius(double radius, List<GameObject> src) {
+        return src.stream()
+            .filter(gameObject -> getDistanceTo(gameObject) < radius)
+            .collect(Collectors.toList());
+    }
+
     public static List<GameObject> getObjectsWithinRadiusOfType(double radius, ObjectTypes type) {
         List<GameObject> gameObjects = new ArrayList<>();
         for (GameObject gameObject : getGameObjectsOfType(type)) {
@@ -130,6 +136,7 @@ public class BotUtils {
 
         return gameObjects;
     }
+
 
     public static List<GameObject> getEnemyList() {
         if (enemies == null || enemies.isEmpty()) {
@@ -162,5 +169,13 @@ public class BotUtils {
         }
 
         return closest;
+    }
+
+    public static boolean isObjectHeadingTo(GameObject obj, Position position, int degreeTolerance) {
+        return Math.abs((obj.getCurrHeading() - getHeading(obj.getPosition(), position)) % 360) <= degreeTolerance;
+    }
+
+    public static boolean isObjectHeadingToPlayer(GameObject obj, int degreeTolerance) {
+        return isObjectHeadingTo(obj, GameContext.getPlayer().getPosition(), degreeTolerance);
     }
 }

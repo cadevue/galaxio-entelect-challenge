@@ -8,7 +8,6 @@ import Enums.PlayerActions;
 import Models.GameObject;
 import Models.PlayerAction;
 
-/** Will be activated if there is a superfood in the game that's worth getting */
 public class GetSuperFood implements IBotState {
     private PlayerAction action;
 

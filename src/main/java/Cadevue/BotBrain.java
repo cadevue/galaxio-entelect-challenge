@@ -9,14 +9,11 @@ import Models.PlayerAction;
 /* Class that decide which action should be done based on the state scores */
 public class BotBrain {
     // Initialization of States
-    private final IBotState STATE_GATHERFOOD = new GatherFood();
-    private final IBotState STATE_GETSUPERFOOD = new GetSuperFood();
-    private final IBotState STATE_TORPEDO_ATTACK = new TorpedoAttack();
-
     private final IBotState[] BOT_STATES = { 
-        STATE_GATHERFOOD,
-        STATE_GETSUPERFOOD,
-        STATE_TORPEDO_ATTACK
+        new GatherFood(),
+        new GetSuperFood(),
+        new TorpedoAttack(),
+        new UseShield()
     };
 
     // Return what action should the bot do
