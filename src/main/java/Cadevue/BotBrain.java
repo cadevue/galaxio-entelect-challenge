@@ -13,7 +13,8 @@ public class BotBrain {
         new GatherFood(),
         new GetSuperFood(),
         new TorpedoAttack(),
-        new UseShield()
+        new UseShield(),
+        new StaySafe()
     };
 
     // Return what action should the bot do

@@ -30,7 +30,7 @@ public class GetSuperFood implements IBotState {
 
         double ratio = distanceToClosestSuperFood / distanceToClosestFood;
 
-        return (float) (140 - (ratio * 100));
+        return (float) (130 - (ratio * 100));
     }
 
     @Override

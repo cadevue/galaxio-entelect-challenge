@@ -74,8 +74,16 @@ public class BotUtils {
         return getHeading(GameContext.getPlayer(), to);
     }
 
+    public static int getOppositeHeading(int heading) {
+        return (heading + 180) % 360;
+    }
+
     public static int radToDeg(double v) {
         return (int) (v * (180 / Math.PI));
+    }
+
+    public static double degToRad(int v) {
+        return v * (Math.PI / 180);
     }
 
     public static List<GameObject> getGameObjectsOfType(ObjectTypes type) {
@@ -99,7 +107,7 @@ public class BotUtils {
         GameObject closest = null;
         float closestDistance = Float.MAX_VALUE;
         for (GameObject gameObject : gameObjects) {
-            float distance = getDistanceTo(gameObject);
+            float distance = getDistanceTo(gameObject) - gameObject.getSize();
             if (distance < closestDistance) {
                 closest = gameObject;
                 closestDistance = distance;
@@ -122,7 +130,7 @@ public class BotUtils {
 
     public static List<GameObject> getObjectsWithinRadius(double radius, List<GameObject> src) {
         return src.stream()
-            .filter(gameObject -> getDistanceTo(gameObject) < radius)
+            .filter(gameObject -> (getDistanceTo(gameObject) - gameObject.getSize()) < radius)
             .collect(Collectors.toList());
     }
 
@@ -161,7 +169,7 @@ public class BotUtils {
         GameObject closest = null;
         float closestDistance = Float.MAX_VALUE;
         for (GameObject gameObject : enemies) {
-            float distance = getDistanceTo(gameObject);
+            float distance = getDistanceTo(gameObject) - gameObject.getSize();
             if (distance < closestDistance) {
                 closest = gameObject;
                 closestDistance = distance;
@@ -177,5 +185,16 @@ public class BotUtils {
 
     public static boolean isObjectHeadingToPlayer(GameObject obj, int degreeTolerance) {
         return isObjectHeadingTo(obj, GameContext.getPlayer().getPosition(), degreeTolerance);
+    }
+
+    public static Position getCenterOf(List<Position> positions) {
+        int x = 0;
+        int y = 0;
+        for (Position pos : positions) {
+            x += pos.x;
+            y += pos.y;
+        }
+
+        return new Position(x / positions.size(), y / positions.size());
     }
 }
