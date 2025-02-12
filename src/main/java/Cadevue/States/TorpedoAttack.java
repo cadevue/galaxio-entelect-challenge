@@ -8,9 +8,9 @@ import Models.GameObject;
 import Models.PlayerAction;
 
 public class TorpedoAttack implements IBotState {
-    private final float ATTACK_WITHIN_RADIUS = 16;
-    private final int SELF_MINIMUM_SIZE_TO_ATTACK = 25;
-    private final int IDEAL_ENEMY_SIZE_TO_ATTACK = 60;
+    private final float ATTACK_WITHIN_RADIUS = 20;
+    private final int SELF_MINIMUM_SIZE_TO_ATTACK = 20;
+    private final int IDEAL_ENEMY_SIZE_TO_ATTACK = 32;
 
     private PlayerAction action;
 

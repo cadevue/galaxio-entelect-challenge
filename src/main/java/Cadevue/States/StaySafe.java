@@ -14,8 +14,8 @@ import Models.Position;
 
 /**  Stay Safe basically : avoid bigger player, avoid boundaries, avoid gas clouds */
 public class StaySafe implements IBotState {
-    private final float ZONE_TOLERANCE_BIGGER_PLAYER = 15;
-    private final float ZONE_TOLERANCE_BOUNDARY = 15;
+    private final float ZONE_TOLERANCE_BIGGER_PLAYER = 10;
+    private final float ZONE_TOLERANCE_BOUNDARY = 10;
     private final float ZONE_TOLERANCE_GAS_CLOUD = 10;
 
     private final float DANGER_STATE_SCORE = 160;
