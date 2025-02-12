@@ -26,21 +26,20 @@ public class GetSuperFood implements IBotState {
             return 0;
         }
 
-        double distanceToClosestFood = BotUtils.getDistanceBetween(GameContext.getPlayer(), closestFood);
-        double distanceToClosestSuperFood = BotUtils.getDistanceBetween(GameContext.getPlayer(), closestSuperFood);
+        double distanceToClosestFood = BotUtils.getDistanceTo(closestFood);
+        double distanceToClosestSuperFood = BotUtils.getDistanceTo(closestSuperFood);
 
         double ratio = distanceToClosestSuperFood / distanceToClosestFood;
 
-        return (float) (325 - (ratio * 100));
+        return (float) (140 - (ratio * 100));
     }
 
     @Override
     public PlayerAction getAction() {
-        goToClosestSuperFood();
-        return action;
+        return goToClosestSuperFood();
     }
 
-    private void goToClosestSuperFood() {
+    private PlayerAction goToClosestSuperFood() {
         GameObject closestSuperFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.SuperFood);
         if (closestSuperFood == null) {
             action.setAction(PlayerActions.Forward);
@@ -57,5 +56,7 @@ public class GetSuperFood implements IBotState {
             int heading = BotUtils.getHeading(GameContext.getPlayer(), closestSuperFood);
             action.setHeading(heading);
         }
+
+        return action;
     }
 }

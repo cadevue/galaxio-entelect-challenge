@@ -11,13 +11,15 @@ public class BotBrain {
     // Initialization of States
     private final IBotState STATE_GATHERFOOD = new GatherFood();
     private final IBotState STATE_GETSUPERFOOD = new GetSuperFood();
+    private final IBotState STATE_TORPEDO_ATTACK = new TorpedoAttack();
 
     private final IBotState[] BOT_STATES = { 
         STATE_GATHERFOOD,
-        STATE_GETSUPERFOOD
+        STATE_GETSUPERFOOD,
+        STATE_TORPEDO_ATTACK
     };
 
-    // Return what acttion should the bot do
+    // Return what action should the bot do
     public PlayerAction getBotAction(GameState gameState, GameObject player) {
         GameContext.setContext(gameState, player);
 

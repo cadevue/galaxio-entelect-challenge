@@ -24,11 +24,10 @@ public class GatherFood implements IBotState {
 
     @Override
     public PlayerAction getAction() {
-        goToClosestFood();
-        return action;
+        return goToClosestFood();
     }
 
-    private void goToClosestFood() {
+    private PlayerAction goToClosestFood() {
         GameObject closestFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.Food);
         if (closestFood == null) {
             action.setAction(PlayerActions.Forward);
@@ -45,5 +44,7 @@ public class GatherFood implements IBotState {
             int heading = BotUtils.getHeading(GameContext.getPlayer(), closestFood);
             action.setHeading(heading);
         }
+
+        return action;
     }
 }

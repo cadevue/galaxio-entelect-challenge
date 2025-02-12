@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import Enums.ObjectTypes;
 import Models.GameObject;
@@ -15,9 +16,15 @@ public class BotUtils {
     private static Map<ObjectTypes, List<GameObject>> objectListOfType = new HashMap<>();
     private static Map<ObjectTypes, GameObject> closestObjectOfType = new HashMap<>();
 
+    private static List<GameObject> enemies = new ArrayList<>();
+    private static GameObject closestEnemy = null;
+
     public static void resetCache() {
         objectListOfType.clear();
         closestObjectOfType.clear();
+
+        enemies.clear();
+        closestEnemy = null;
     }
 
     private static void calculateObjectListOfTypes() {
@@ -31,18 +38,19 @@ public class BotUtils {
     }
 
     /** Utilities */
-    public static double getDistance(Position pos1, Position pos2) {
-        var xDist = Math.abs(pos1.x - pos2.x);
-        var yDist = Math.abs(pos1.y - pos2.y);
-        return Math.sqrt(xDist * xDist + yDist * yDist);
+    public static float getDistance(Position pos1, Position pos2) {
+        return (float) Math.sqrt(
+            Math.pow(pos1.x - pos2.x, 2) + 
+            Math.pow(pos1.y - pos2.y, 2)
+        );
     }
 
-    public static double getDistanceBetween(Position pos1, Position pos2) {
+    public static float getDistanceBetween(Position pos1, Position pos2) {
         return getDistance(pos1, pos2);
     }
 
-    public static double getDistanceBetween(GameObject obj1, GameObject obj2) {
-        return getDistance(obj1.getPosition(), obj2.getPosition());
+    public static float getDistanceTo(GameObject obj) {
+        return getDistance(GameContext.getPlayer().getPosition(), obj.getPosition());
     }
 
     public static int getHeading(Position from, Position to) {
@@ -56,6 +64,14 @@ public class BotUtils {
 
     public static int getHeading(GameObject from, GameObject to) {
         return getHeading(from.getPosition(), to.getPosition());
+    }
+
+    public static int getHeadingTo(Position to) {
+        return getHeading(GameContext.getPlayer().getPosition(), to);
+    }
+
+    public static int getHeadingTo(GameObject to) {
+        return getHeading(GameContext.getPlayer(), to);
     }
 
     public static int radToDeg(double v) {
@@ -76,18 +92,69 @@ public class BotUtils {
         }
 
         List<GameObject> gameObjects = getGameObjectsOfType(type);
-        if (
-            gameObjects == null || 
-            gameObjects.isEmpty() || 
-            GameContext.getPlayer() == null
-        ) {
+        if (gameObjects == null || gameObjects.isEmpty() || GameContext.getPlayer() == null) {
             return null;
         }
 
         GameObject closest = null;
-        double closestDistance = Double.MAX_VALUE;
+        float closestDistance = Float.MAX_VALUE;
         for (GameObject gameObject : gameObjects) {
-            double distance = getDistanceBetween(GameContext.getPlayer(), gameObject);
+            float distance = getDistanceTo(gameObject);
+            if (distance < closestDistance) {
+                closest = gameObject;
+                closestDistance = distance;
+            }
+        }
+
+        return closest;
+    }
+
+    public static List<GameObject> getObjectsWithinRadius(double radius) {
+        List<GameObject> gameObjects = new ArrayList<>();
+        for (GameObject gameObject : GameContext.getGameState().getGameObjects()) {
+            if (getDistanceTo(gameObject) < radius) {
+                gameObjects.add(gameObject);
+            }
+        }
+
+        return gameObjects;
+    }
+
+    public static List<GameObject> getObjectsWithinRadiusOfType(double radius, ObjectTypes type) {
+        List<GameObject> gameObjects = new ArrayList<>();
+        for (GameObject gameObject : getGameObjectsOfType(type)) {
+            if (getDistanceTo(gameObject) < radius) {
+                gameObjects.add(gameObject);
+            }
+        }
+
+        return gameObjects;
+    }
+
+    public static List<GameObject> getEnemyList() {
+        if (enemies == null || enemies.isEmpty()) {
+            enemies = GameContext.getGameState().getPlayerGameObjects().stream()
+                .filter(gameObject -> gameObject.getId() != GameContext.getPlayer().getId())
+                .collect(Collectors.toList());
+        }
+
+        return enemies;
+    }
+
+    public static GameObject getClosestEnemy() {
+        if (closestEnemy != null) {
+            return closestEnemy;
+        }
+
+        List<GameObject> enemies = getEnemyList();
+        if (enemies == null || enemies.isEmpty() || GameContext.getPlayer() == null) {
+            return null;
+        }
+
+        GameObject closest = null;
+        float closestDistance = Float.MAX_VALUE;
+        for (GameObject gameObject : enemies) {
+            float distance = getDistanceTo(gameObject);
             if (distance < closestDistance) {
                 closest = gameObject;
                 closestDistance = distance;
