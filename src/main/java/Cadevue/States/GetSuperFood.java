@@ -1,7 +1,5 @@
 package Cadevue.States;
 
-import java.util.List;
-
 import Cadevue.BotUtils;
 import Cadevue.GameContext;
 import Cadevue.IBotState;
@@ -10,7 +8,7 @@ import Enums.PlayerActions;
 import Models.GameObject;
 import Models.PlayerAction;
 
-/** The very default state of the bot, gather food */
+/** Will be activated if there is a superfood in the game that's worth getting */
 public class GetSuperFood implements IBotState {
     private PlayerAction action;
 
@@ -21,15 +19,8 @@ public class GetSuperFood implements IBotState {
     @Override
     public float getStateScore() {
         // Will be prioritized over GatherFood if the superfood is not too far
-        GameObject closestFood = BotUtils.getClosestGameObject(
-            GameContext.getPlayer(), 
-            GameContext.getGameObjectsOfType(ObjectTypes.SuperFood)
-        );
-
-        GameObject closestSuperFood = BotUtils.getClosestGameObject(
-            GameContext.getPlayer(), 
-            GameContext.getGameObjectsOfType(ObjectTypes.SuperFood)
-        );
+        GameObject closestFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.Food);
+        GameObject closestSuperFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.SuperFood);
 
         if (closestFood == null || closestSuperFood == null) {
             return 0;
@@ -40,7 +31,7 @@ public class GetSuperFood implements IBotState {
 
         double ratio = distanceToClosestSuperFood / distanceToClosestFood;
 
-        return (float)ratio * 25;
+        return (float) (325 - (ratio * 100));
     }
 
     @Override
@@ -50,8 +41,8 @@ public class GetSuperFood implements IBotState {
     }
 
     private void goToClosestSuperFood() {
-        List<GameObject> superFoods = GameContext.getGameObjectsOfType(ObjectTypes.SuperFood);
-        if (superFoods == null || superFoods.isEmpty()) {
+        GameObject closestSuperFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.SuperFood);
+        if (closestSuperFood == null) {
             action.setAction(PlayerActions.Forward);
 
             int heading = BotUtils.getHeading(
@@ -63,9 +54,7 @@ public class GetSuperFood implements IBotState {
         } else {
             action.setAction(PlayerActions.Forward);
 
-            GameObject closestFood = BotUtils.getClosestGameObject( GameContext.getPlayer(), superFoods );
-            int heading = BotUtils.getHeading(GameContext.getPlayer(), closestFood);
-
+            int heading = BotUtils.getHeading(GameContext.getPlayer(), closestSuperFood);
             action.setHeading(heading);
         }
     }

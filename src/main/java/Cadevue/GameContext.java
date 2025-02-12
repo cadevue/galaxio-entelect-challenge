@@ -1,11 +1,5 @@
 package Cadevue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import Enums.ObjectTypes;
 import Models.GameObject;
 import Models.GameState;
 
@@ -14,13 +8,11 @@ public class GameContext {
     private static GameState gameState;
     private static GameObject player;
 
-    private static Map<ObjectTypes, List<GameObject>> gameObjects = new HashMap<>();
-
     public static void setContext(GameState gameState, GameObject player) {
         GameContext.gameState = gameState;
         GameContext.player = player;
 
-        gameObjects.clear();
+        BotUtils.resetCache();
     }
 
     public static GameState getGameState() {
@@ -29,24 +21,5 @@ public class GameContext {
 
     public static GameObject getPlayer() {
         return GameContext.player;
-    }
-
-    private static void calculateGameObjects() {
-        for (GameObject gameObject : gameState.getGameObjects()) {
-            if (!gameObjects.containsKey(gameObject.getGameObjectType())) {
-                gameObjects.put(gameObject.getGameObjectType(), new ArrayList<>());
-                gameObjects.get(gameObject.getGameObjectType()).add(gameObject);
-            } else {
-                gameObjects.get(gameObject.getGameObjectType()).add(gameObject);
-            }
-        }
-    }
-
-    public static List<GameObject> getGameObjectsOfType(ObjectTypes type) {
-        if (GameContext.gameObjects.isEmpty()) {
-            calculateGameObjects();
-        }
-
-        return GameContext.gameObjects.get(type);
     }
 }

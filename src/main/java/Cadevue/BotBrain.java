@@ -24,6 +24,8 @@ public class BotBrain {
         IBotState bestState = calculateBestState();
         PlayerAction action = bestState.getAction();
 
+        System.out.println("State: " + bestState.toString());
+
         return action;
     }
 

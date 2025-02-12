@@ -1,7 +1,5 @@
 package Cadevue.States;
 
-import java.util.List;
-
 import Cadevue.BotUtils;
 import Cadevue.GameContext;
 import Cadevue.IBotState;
@@ -10,7 +8,7 @@ import Enums.PlayerActions;
 import Models.GameObject;
 import Models.PlayerAction;
 
-/** The very default state of the bot, gather food */
+/** The default state of the bot, gather food */
 public class GatherFood implements IBotState {
     private PlayerAction action;
 
@@ -31,8 +29,8 @@ public class GatherFood implements IBotState {
     }
 
     private void goToClosestFood() {
-        List<GameObject> foods = GameContext.getGameObjectsOfType(ObjectTypes.Food);
-        if (foods == null || foods.isEmpty()) {
+        GameObject closestFood = BotUtils.getClosestGameObjectOfType(ObjectTypes.Food);
+        if (closestFood == null) {
             action.setAction(PlayerActions.Forward);
 
             int heading = BotUtils.getHeading(
@@ -44,9 +42,7 @@ public class GatherFood implements IBotState {
         } else {
             action.setAction(PlayerActions.Forward);
 
-            GameObject closestFood = BotUtils.getClosestGameObject( GameContext.getPlayer(), foods );
             int heading = BotUtils.getHeading(GameContext.getPlayer(), closestFood);
-
             action.setHeading(heading);
         }
     }
