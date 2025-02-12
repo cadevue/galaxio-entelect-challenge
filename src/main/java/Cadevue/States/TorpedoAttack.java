@@ -21,7 +21,10 @@ public class TorpedoAttack implements IBotState {
     @Override
     public float getStateScore() {
         // Will be prioritized if size there is enemy in range and size is save to attack
-        if (GameContext.getPlayer().getTorpedoSalvoCount() == 0 || GameContext.getPlayer().getSize() < SELF_MINIMUM_SIZE_TO_ATTACK) {
+        if (
+            GameContext.getPlayer().getTorpedoSalvoCount() == 0 || 
+            GameContext.getPlayer().getSize() < SELF_MINIMUM_SIZE_TO_ATTACK
+        ) {
             return 0;
         }
 
