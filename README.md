@@ -2,13 +2,13 @@
 
 > This project is part of my CS202 Challenge. More details about it on [my website](https://cadevue.com)! (updated soon)
 
-# 🧰 Technology Used
+## Technology Used
 The technologies used in this project are:
 - **Dotnet Core 3.1** for the game engine
 - **Java JRE 11** for the bot implementation
 - **Microsoft SignalR** for server-client communication
 
-# 📌 About This Project 
+## About This Project 
 This bot is made as part of my Computer Science Study at Bandung Institute of Technology. The specific course related to this project is IF2211 Algorithm Strategy. The full specification of the project is available at the [docs folder](docs/Specification.pdf), although it is available only in Indonesian.
 
 This project was originally assigned at the 4th semester, but I revisit this project (February 2025) to refine the code quality, and refresh my knowledge about Java and algorithm strategy. The result was that the current bot is better then the original one, based on some runs of test.
@@ -18,7 +18,7 @@ https://github.com/cadevue/Tubes1_Solar-Sailers
 
 and credits to my friends who contribute to the original project: [Puti Nabilla Aidira](https://github.com/Putinabillaa) and [Althaaf Khasyi Atisomya](https://github.com/althaafka)
 
-# 📝 Project Description 
+## Project Description 
 A bot made for the Galaxio game from The [Entelect Challenge 2021](https://github.com/EntelectChallenge/2021-Galaxio). The bot is implemented in Java and follow the greedy algorithm paradigm. There are in total 8 states that the bot can be in:
 
 1. **GatherFood**: The default state. The bot search around for food and fly towards them.
@@ -32,7 +32,7 @@ A bot made for the Galaxio game from The [Entelect Challenge 2021](https://githu
 
 Every state will have their own `State Score` based on the current game state (enemy positions, obstacle, current size, etc.). The state with the highest score will be chosen. This of course follows the greedy approach, where it picks the best solution based on the current situation only.
 
-# 🚀 How to Run
+## How to Run
 Information about the engine and visualizer can be found in the [Galaxio-2021 Official Repo](https://github.com/EntelectChallenge/2021-Galaxio)!
 
 *There are in total 5 things you should run: The engine and 4 bots. If you want to visualize the gameplay, then you have to run 1 more - the visualizer* 
@@ -61,7 +61,7 @@ Galaxio will need 4 bots to run the game, so you can re-run another bot by repea
 ### Visualizing the Game
 The game will first be simulated in the terminal, and will generate logs that can be visualized. To visualize the game, you should run the visualizer. More about it in the [visualizer documentation](https://github.com/cadevue/galaxio-entelect-challenge-engine/blob/master/visualiser/README.md).
 
-# 📸 Documentation
+## Documentation
 Here are some documentations of the galaxio bot in action.
 ### Three-Way Battle
 ![Screenshot - Three-Way Battle](./docs/screenshots/battle02.png)
