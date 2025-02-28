@@ -2,16 +2,6 @@
 
 > This project is part of my CS202 Challenge. More details about it on [my website](https://cadevue.com)! (updated soon)
 
-## About This Project 
-This bot is made as part of my Computer Science Study at Bandung Institute of Technology. The specific course related to this project is IF2211 Algorithm Strategy. The full specification of the project is available at the [docs folder](docs/Specification.pdf), although it is available only in Indonesian.
-
-This project was originally assigned at the 4th semester, but I revisit this project (February 2025) to refine the code quality, and refresh my knowledge about Java and algorithm strategy. The result was that the current bot is better then the original one, based on some runs of test.
-
-The repository to the original bot can be found here:
-https://github.com/cadevue/Tubes1_Solar-Sailers
-
-and credits to my friends who contribute to the original project: [Puti Nabilla Aidira](https://github.com/Putinabillaa) and [Althaaf Khasyi Atisomya](https://github.com/althaafka)
-
 ## Project Description 
 A bot made for the Galaxio game from The [Entelect Challenge 2021](https://github.com/EntelectChallenge/2021-Galaxio). The bot is implemented in Java and follow the greedy algorithm paradigm. There are in total 8 states that the bot can be in:
 
